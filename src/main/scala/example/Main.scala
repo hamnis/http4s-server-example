@@ -3,9 +3,11 @@ package example
 import cats.effect.{ExitCode, IO, IOApp}
 import org.http4s._
 import org.http4s.implicits._
-import org.http4s.netty.server.NettyServerBuilder
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.blaze.BlazeServerBuilder
+import org.http4s.server.jetty.JettyBuilder
+import org.http4s.netty.server.NettyServerBuilder
+import org.http4s.server.tomcat.TomcatBuilder
 
 object NettyTestServer extends IOApp {
   override def run(args: List[String]): IO[ExitCode] =
@@ -36,5 +38,23 @@ object EmberTestServer extends IOApp {
       .withMaxConcurrency(200) //tweak it
       .withHttpApp(NettyTestServer.app)
       .build
+      .use(_ => IO.never)
+}
+
+object JettyTestServer extends IOApp {
+  override def run(args: List[String]): IO[ExitCode] =
+    JettyBuilder[IO]
+      .bindHttp``(8080)
+      .mountHttpApp(NettyTestServer.app, "/")
+      .resource
+      .use(_ => IO.never)
+}
+
+object TomcatTestServer extends IOApp {
+  override def run(args: List[String]): IO[ExitCode] =
+    TomcatBuilder[IO]
+      .bindHttp(8080)
+      .mountHttpApp(NettyTestServer.app, "/")
+      .resource
       .use(_ => IO.never)
 }

@@ -15,6 +15,8 @@ val netty = "0.1.0"
 libraryDependencies ++= List(
   "org.http4s" %% "http4s-ember-server" % http4sVersion,
   "org.http4s" %% "http4s-blaze-server" % http4sVersion,
+  "org.http4s" %% "http4s-jetty" % http4sVersion,
+  "org.http4s" %% "http4s-tomcat" % http4sVersion,
   "org.http4s" %% "http4s-netty-server" % netty,
   "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
