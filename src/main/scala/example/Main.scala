@@ -32,6 +32,7 @@ object EmberTestServer extends IOApp {
   override def run(args: List[String]): IO[ExitCode] =
     EmberServerBuilder
       .default[IO]
+      .withPort(8080)
       .withMaxConcurrency(200) //tweak it
       .withHttpApp(NettyTestServer.app)
       .build
