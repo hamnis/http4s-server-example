@@ -18,3 +18,5 @@ libraryDependencies ++= List(
   "org.http4s" %% "http4s-netty-server" % netty,
   "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
+
+fork in run := true
