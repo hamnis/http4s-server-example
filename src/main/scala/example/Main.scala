@@ -51,7 +51,7 @@ object JettyTestServer extends IOApp {
   override def run(args: List[String]): IO[ExitCode] =
     JettyBuilder[IO]
       .bindHttp(8080)
-      .mountHttpApp(NettyTestServer.app, "/")
+      .mountHttpApp(Main.app, "/")
       .resource
       .use(_ => IO.never)
 }
@@ -60,14 +60,14 @@ object TomcatTestServer extends IOApp {
   override def run(args: List[String]): IO[ExitCode] =
     TomcatBuilder[IO]
       .bindHttp(8080)
-      .mountHttpApp(NettyTestServer.app, "/")
+      .mountHttpApp(Main.app, "/")
       .resource
       .use(_ => IO.never)
 }
 
 object FinagleTestServer extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
-    val server = IO(FHttp.server.serve(":8080", Finagle.mkService(NettyTestServer.app)))
+    val server = IO(FHttp.server.serve(":8080", Finagle.mkService(Main.app)))
     server.map(Await.ready(_)) >> IO.never
   }
 }
