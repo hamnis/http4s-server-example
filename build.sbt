@@ -1,10 +1,10 @@
 inThisBuild(
   Seq(
     organization := "org.http4s",
-    crossScalaVersions := Seq("2.13.4"),
+    crossScalaVersions := Seq("2.13.5"),
     scalaVersion := crossScalaVersions.value.head,
     testFrameworks += new TestFramework("munit.Framework"),
-    addCompilerPlugin(("org.typelevel" % "kind-projector" % "0.11.1").cross(CrossVersion.full)),
+    addCompilerPlugin(("org.typelevel" % "kind-projector" % "0.11.3").cross(CrossVersion.full)),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")
  )
 )
@@ -24,7 +24,7 @@ libraryDependencies ++= List(
   "ch.qos.logback" % "logback-classic" % "1.2.3"
 )
 
-fork in run := true
+run / fork := true
 addCommandAlias("netty", "runMain example.NettyTestServer")
 addCommandAlias("blaze", "runMain example.BlazeTestServer")
 addCommandAlias("finagle", "runMain example.FinagleTestServer")
