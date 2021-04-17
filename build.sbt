@@ -9,9 +9,9 @@ inThisBuild(
  )
 )
 
-val http4sVersion = "0.21.13"
-val netty = "0.2.0"
-val finagle = "0.21.11-20.10.0"
+val http4sVersion = "0.21.22"
+val netty = "0.3.0"
+val finagle = "0.21.22-21.3.0"
 
 libraryDependencies ++= List(
   "org.http4s" %% "http4s-ember-server" % http4sVersion,
